@@ -14,39 +14,39 @@ Few things before you proceed to set expectations
 
 ## 🚀 Setup Steps
 1. Clone the repository:
-```bash
-git clone https://github.com/vkeshav123/parspec_assignment.git
-```
+    ```bash
+    git clone https://github.com/vkeshav123/parspec_assignment.git
+    ```
 2. Create a local postgres databse for the project
 3. Update the database configuration in the `oms-service-configuration.yml` file in root directory
-3. Run the following script to create order table. You can run this script any no of times, if you need to clean the data
-```bash
-DROP TABLE IF EXISTS "orders";
-DROP TYPE IF EXISTS order_status;
+4. Run the following script to create order table. You can run this script any no of times, if you need to clean the data
+    ```bash
+    DROP TABLE IF EXISTS "orders";
+    DROP TYPE IF EXISTS order_status;
 
-CREATE TYPE order_status AS ENUM ('pending', 'processing', 'completed');
-CREATE TABLE "orders" (
-    id SERIAL PRIMARY KEY,
-    product_id INTEGER,
-    quantity INTEGER,
-    order_amount INTEGER NOT NULL,
-    status order_status NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    completed_at TIMESTAMP
-);
-```
-4. Tweak order configuration in `oms-service-configuration.yml` file as per your preference. For reference
+    CREATE TYPE order_status AS ENUM ('pending', 'processing', 'completed');
+    CREATE TABLE "orders" (
+        id SERIAL PRIMARY KEY,
+        product_id INTEGER,
+        quantity INTEGER,
+        order_amount INTEGER NOT NULL,
+        status order_status NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        completed_at TIMESTAMP
+    );
+    ```
+5. Tweak order configuration in `oms-service-configuration.yml` file as per your preference.    For reference
     - `load_creation_batch_size` refers to the no of orders which will be created simulataneously once server is up
     - `processing_batch_size` refers to no of orders which will be picked from `pending` state and will be updated to `processing` state
     - `processing_interval` refers to the time interval in seconds which will do that above step repeatedly
     - `completion_batch_size` refers to no of orders which will be picked from `processing` state and will be updated to `completed` state
     - `completion_interval` refers to the time interval in seconds which will do that above step repeatedly
-5. Open into the project directory and run from terminal 
-```bash 
-go run main.go
-```
-5. Run the metrics api via following curl. Response of API is self explainatory
-```bash
-curl --location 'http://localhost:8080/order_metrics'
-``` 
+6. Open into the project directory and run from terminal 
+    ```bash 
+    go run main.go
+    ```
+7. Run the metrics api via following curl. Response of API is self explainatory
+    ```bash
+    curl --location 'http://localhost:8080/order_metrics'
+    ``` 
