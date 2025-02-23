@@ -15,7 +15,7 @@ Few things before you proceed to set expectations
 ## 🚀 Setup Steps
 1. Clone the repository:
 ```bash
-    git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/your-username/your-repo.git
 ```
 2. Create a local postgres databse for the project
 3. Run the following script to create order table
@@ -38,10 +38,9 @@ CREATE TABLE "orders" (
 4. Tweak order configuration in oms-service-configuration.yml file as per your preference. 
 5. Open into the project directory and run from terminal 
 ```bash 
-    go run main.go
+go run main.go
 ```
 5. Run the metrics api via following curl 
 ```bash
 curl --location 'http://localhost:8080/order_metrics'
-
 ``` 
