@@ -18,10 +18,11 @@ Few things before you proceed to set expectations
 git clone https://github.com/vkeshav123/parspec_assignment.git
 ```
 2. Create a local postgres databse for the project
-3. Run the following script to create order table
+3. Update the database configuration in the `oms-service-configuration.yml` file in root directory
+3. Run the following script to create order table. You can run this script any no of times, if you need to clean the data
 ```bash
 DROP TABLE IF EXISTS "orders";
-DROP TYPE order_status;
+DROP TYPE IF EXISTS order_status;
 
 CREATE TYPE order_status AS ENUM ('pending', 'processing', 'completed');
 CREATE TABLE "orders" (
