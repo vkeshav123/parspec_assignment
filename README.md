@@ -4,6 +4,7 @@ Thanks for the assignment, it was quite interesting.
 Few things before you proceed to set expectations
 - Some of the code is commented which was created for some purpose but didnt seem useful later. But I kept it because it can be used to further build up the project. So ignore that for now. 
 - Missed some of the components like Unit tests due to lack of time. I prioritized to focus on the key aspects first
+- Everyone can make mistakes, it might be possible if i had understood the problem in a different spirit. If thats the case, please share the feedback
 
 ## 📦 Features
 - 'X' no of orders are created simulataneously as soon as server is up.
