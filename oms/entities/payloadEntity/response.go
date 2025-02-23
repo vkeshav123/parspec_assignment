@@ -20,5 +20,7 @@ type GetOrderMetricsResponse struct {
 	PendingOrders     int `json:"pending_orders"`
 	ProcessingOrders  int `json:"processing_orders"`
 	CompletedOrders   int `json:"completed_orders"`
+	AvgPendingTime    int `json:"average_pending_time"`
 	AvgProcessingTime int `json:"average_processing_time"`
+	AvgCompletionTime int `json:"average_completion_time"`
 }

@@ -9,7 +9,7 @@ type Order struct {
 	OrderAmount float64   `gorm:"order_amount"`
 	Status      string    `gorm:"status"`
 	CreatedAt   time.Time `gorm:"created_at"`
-	UpdatedAt   time.Time `gorm:"updated_at"`
+	ProcessedAt time.Time `gorm:"processed_at"`
 	CompletedAt time.Time `gorm:"completed_at"`
 }
 

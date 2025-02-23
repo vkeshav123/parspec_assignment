@@ -32,7 +32,6 @@ func StartOrderCreation(repoInstance repo.Repo, config providers.Order) {
 			OrderAmount: 100,
 			Status:      "pending",
 			CreatedAt:   time.Now(),
-			UpdatedAt:   time.Now(),
 		}
 		jobs <- order
 	}

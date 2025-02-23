@@ -1,6 +1,7 @@
 package repo
 
 import (
+	"errors"
 	"oms/oms/entities/gormEntity"
 	"oms/oms/globals"
 	"time"
@@ -37,14 +38,15 @@ func (r *Repo) UpdateOrder(orderId int, status string) error {
 	if status == globals.OrderStatusCompleted {
 		gormStatement.UpdateColumns(map[string]interface{}{
 			"status":       status,
-			"updated_at":   time.Now(),
 			"completed_at": time.Now(),
 		})
-	} else {
+	} else if status == globals.OrderStatusProcessing {
 		gormStatement.UpdateColumns(map[string]interface{}{
-			"status":     status,
-			"updated_at": time.Now(),
+			"status":       status,
+			"processed_at": time.Now(),
 		})
+	} else {
+		return errors.New("status cannot be updated")
 	}
 	err := gormStatement.Error
 	if err != nil {

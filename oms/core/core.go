@@ -62,7 +62,9 @@ func (c *Core) GetOrderMetrics() (payloadEntity.GetOrderMetricsResponse, error) 
 		return payloadEntity.GetOrderMetricsResponse{}, err
 	}
 	var totalAmount float64
-	var totalTimeTaken time.Duration
+	var totalCompletionTime time.Duration
+	var totalPendingTime time.Duration
+	var totalProcessingTime time.Duration
 	var pendingOrders, completedOrders, processingOrders int
 	for _, order := range orders {
 		totalAmount += order.OrderAmount
@@ -71,19 +73,28 @@ func (c *Core) GetOrderMetrics() (payloadEntity.GetOrderMetricsResponse, error) 
 			pendingOrders++
 		case globals.OrderStatusCompleted:
 			timeTaken := order.CompletedAt.Sub(order.CreatedAt)
-			totalTimeTaken += timeTaken
+			totalCompletionTime += timeTaken
+			processingTime := order.CompletedAt.Sub(order.ProcessedAt)
+			totalProcessingTime += processingTime
 			completedOrders++
 		case globals.OrderStatusProcessing:
+			pendingTime := order.ProcessedAt.Sub(order.CreatedAt)
+			totalPendingTime += pendingTime
 			processingOrders++
 		}
 	}
-	averageProcessingTime := int(totalTimeTaken.Seconds()) / len(orders)
+	averagePendingTime := int(totalPendingTime.Seconds()) / len(orders)
+	averageProcessingTime := int(totalProcessingTime.Seconds()) / len(orders)
+	averageCompletionTime := int(totalCompletionTime.Seconds()) / len(orders)
+
 	totalOrders := pendingOrders + completedOrders + processingOrders
 	return payloadEntity.GetOrderMetricsResponse{
 		TotalOrders:       totalOrders,
 		PendingOrders:     pendingOrders,
 		ProcessingOrders:  processingOrders,
 		CompletedOrders:   completedOrders,
+		AvgPendingTime:    averagePendingTime,
 		AvgProcessingTime: averageProcessingTime,
+		AvgCompletionTime: averageCompletionTime,
 	}, nil
 }
