@@ -47,7 +47,8 @@ Few things before you proceed to set expectations
     ```bash 
     go run main.go
     ```
-7. Run the metrics api via following curl. Response of API is self explainatory
+7. Run the metrics api via following curl. Response of API is self explainatory. 
     ```bash
     curl --location 'http://localhost:8080/order_metrics'
     ``` 
+8. Keep hitting the server randomly with the metrics API and observe how the average pending state time, processing time and completion time evolves. That will guide us to tweak the configuration intervals to optimize the orders as well. From here, we enter analytics.
