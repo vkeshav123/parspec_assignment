@@ -15,7 +15,7 @@ Few things before you proceed to set expectations
 ## 🚀 Setup Steps
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/vkeshav123/parspec_assignment.git
 ```
 2. Create a local postgres databse for the project
 3. Run the following script to create order table
